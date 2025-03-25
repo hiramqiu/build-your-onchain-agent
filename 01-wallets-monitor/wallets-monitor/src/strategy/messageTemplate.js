@@ -29,7 +29,10 @@ function formatSmartMoney(analysis) {
 // Creates a formatted message with token information and smart money analysis
 export function createMsg(tokenInfo, analysis) {
   const smartMoneyCount = Object.keys(analysis).length;
-  
+    // 计算持仓量为 100% 的钱包数量
+    const fullHoldersCount = Object.values(analysis).filter(
+      data => data.holdsPercentage === '100.00%'
+    ).length;
   return `
 \u{1F436} Multi Buy Token: <b>$${tokenInfo.symbol}</b>
 <code>${tokenInfo.address}</code>
@@ -43,7 +46,8 @@ export function createMsg(tokenInfo, analysis) {
 \u{1F90D} <b>Age:</b> <code>${formatTimeAgo(tokenInfo.createdAt)}</code>
 \u{1F49B} <b>6H:</b> <code>${tokenInfo.changeH6}%</code>
 \u{1F90E} <b>SmartMoney:</b>
-${smartMoneyCount} wallets bought $${tokenInfo.symbol}
+${smartMoneyCount} wallets bought $${tokenInfo.symbol},其中有 ${fullHoldersCount} 个钱包的持仓量为 100%
+
 
 ${formatSmartMoney(analysis)}
 
