@@ -11,8 +11,8 @@ dotenv.config();
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 // Configuration constants
-const MAX_AGE_DAYS = 7;
-const MIN_MARKET_CAP = 100000; // 100k
+const MAX_AGE_DAYS = 3;
+const MIN_MARKET_CAP = 10000; // 10k
 
 const getTimeStamp = () => {
   return new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
